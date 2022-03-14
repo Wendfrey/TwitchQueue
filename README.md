@@ -17,7 +17,7 @@ Primero deberás iniciar sesión, para ello sigue los siguientes pasos:
 ### !queue_clear
   Elimina a todos los jugadores de la cola
 
-###!queue_join
+### !queue_join
   Únete a la cola!
 
 ### !queue_exit
