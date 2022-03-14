@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MainWindow/BanedPlayerLabel/BannedPlayerLabel.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="BannedPlayerLabel" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="BannedPlayerButton" type="MenuButton" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+align = 0
+items = [ "Desvetar", null, 0, false, false, 4, 0, null, "", false ]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="BannedPlayerButton" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BannedPlayerButton" to="." method="_on_mouse_exited"]

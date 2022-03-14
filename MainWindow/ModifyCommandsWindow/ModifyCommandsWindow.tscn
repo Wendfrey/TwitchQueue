@@ -1,0 +1,136 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MainWindow/ModifyCommandsWindow/ModifyCommandsWindow.gd" type="Script" id=1]
+
+[node name="ModifyCommandsWindow" type="WindowDialog"]
+margin_left = 196.0
+margin_top = 113.0
+margin_right = 761.0
+margin_bottom = 439.0
+window_title = "Modificar Comandos"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 560.0
+margin_bottom = 321.0
+
+[node name="CommandSelector" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+margin_right = 555.0
+margin_bottom = 20.0
+text = "queue_clear"
+items = [ "queue_clear", null, false, 0, null, "queue_join", null, false, 1, null, "queue_exit", null, false, 2, null, "queue_rmp", null, false, 3, null, "queue_next", null, false, 4, null, "queue_ban", null, false, 5, null, "queue_unban", null, false, 6, null, "queue_commands", null, false, 7, null, "queue_position", null, false, 8, null, "queue_top10", null, false, 9, null ]
+selected = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 555.0
+margin_bottom = 292.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 551.0
+margin_bottom = 264.0
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CommandDescrLabel" type="Label" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+margin_right = 547.0
+margin_bottom = 14.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 29.0
+margin_right = 547.0
+margin_bottom = 67.0
+
+[node name="PermissionFlagLabel" type="Label" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+margin_right = 547.0
+margin_bottom = 14.0
+text = "Permisos de uso"
+
+[node name="PermFlagOption" type="OptionButton" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 547.0
+margin_bottom = 38.0
+text = "Cualquiera"
+items = [ "Cualquiera", null, false, 0, null, "Subscriptores", null, false, 1, null, "Moderadores", null, false, 2, null, "Streamer", null, false, 3, null ]
+selected = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 82.0
+margin_right = 547.0
+margin_bottom = 124.0
+
+[node name="AliasLabel" type="Label" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer2"]
+margin_right = 547.0
+margin_bottom = 14.0
+text = "Alias (separado por comas)"
+
+[node name="AliasEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 18.0
+margin_right = 547.0
+margin_bottom = 42.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_left = 289.0
+margin_top = 296.0
+margin_right = 555.0
+margin_bottom = 316.0
+size_flags_horizontal = 8
+
+[node name="AplicarButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 56.0
+margin_bottom = 20.0
+size_flags_horizontal = 8
+text = "Aplicar"
+
+[node name="CancelarButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 60.0
+margin_right = 126.0
+margin_bottom = 20.0
+text = "Cancelar"
+
+[node name="DefectoButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 130.0
+margin_right = 266.0
+margin_bottom = 20.0
+text = "Valores por defecto"
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/CommandSelector" to="." method="_on_CommandSelector_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/PermFlagOption" to="." method="_on_PermFlagOption_item_selected"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer2/AliasEdit" to="." method="_on_AliasEdit_text_changed"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxContainer/AplicarButton" to="." method="_on_AplicarButton_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxContainer/CancelarButton" to="." method="_on_CancelarButton_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxContainer/DefectoButton" to="." method="_on_DefectoButton_button_up"]

@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://MainWindow/PlayerLabel/PlayerLabel.gd" type="Script" id=1]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="PlayerLabel" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+theme = SubResource( 1 )
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 293.0
+margin_right = 65.0
+margin_bottom = 307.0
+text = "POSICION"
+
+[node name="MenuButton" type="MenuButton" parent="HBoxContainer"]
+margin_left = 69.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+text = "TEST"
+align = 0
+items = [ "Vetar", null, 0, false, false, 1, 0, null, "", false, "Eliminar de cola", null, 0, false, false, 2, 0, null, "", false, "Cambiar posicion", null, 0, false, false, 3, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="mouse_entered" from="." to="." method="_on_PlayerLabel_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_PlayerLabel_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/MenuButton" to="." method="_on_PlayerLabel_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/MenuButton" to="." method="_on_PlayerLabel_mouse_exited"]

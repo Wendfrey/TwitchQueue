@@ -1,0 +1,280 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://MainWindow/Gift.gd" type="Script" id=2]
+[ext_resource path="res://MainWindow/PlayersList.gd" type="Script" id=3]
+[ext_resource path="res://MainWindow/BannedPlayersList.gd" type="Script" id=4]
+[ext_resource path="res://MainWindow/AuthDialog/AuthDialog.tscn" type="PackedScene" id=5]
+[ext_resource path="res://MainWindow/ModifyCommandsWindow/ModifyCommandsWindow.tscn" type="PackedScene" id=6]
+[ext_resource path="res://MainWindow/ChangePlayerPosWindow/ChangePlayerPosWindow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://MainWindow/BlockingBackground.gd" type="Script" id=8]
+[ext_resource path="res://MainWindow/BanPlayerWindow/BanPlayerWindow.tscn" type="PackedScene" id=9]
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+test_practice = true
+
+[node name="Gift" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.02833
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TopBar" type="HBoxContainer" parent="Panel"]
+margin_left = 15.0
+margin_top = 10.0
+margin_right = 792.0
+margin_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsMenu" type="MenuButton" parent="Panel/TopBar"]
+margin_right = 73.0
+margin_bottom = 30.0
+text = "Opciones"
+items = [ "Cambiar Comandos", null, 0, false, false, 0, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator" type="VSeparator" parent="Panel/TopBar"]
+margin_left = 77.0
+margin_right = 81.0
+margin_bottom = 30.0
+
+[node name="StartButton" type="Button" parent="Panel/TopBar"]
+margin_left = 85.0
+margin_right = 137.0
+margin_bottom = 30.0
+text = "Iniciar"
+
+[node name="ChannelInfo" type="Label" parent="Panel/TopBar"]
+margin_left = 141.0
+margin_top = 8.0
+margin_right = 324.0
+margin_bottom = 22.0
+text = "No conectado a ningun canal"
+max_lines_visible = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Panel/TopBar"]
+margin_left = 328.0
+margin_right = 332.0
+margin_bottom = 30.0
+
+[node name="SendMsgCheckBox" type="CheckBox" parent="Panel/TopBar"]
+margin_left = 336.0
+margin_right = 524.0
+margin_bottom = 30.0
+pressed = true
+text = "Enviar mensajes a Twitch"
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+margin_left = 10.0
+margin_top = 50.0
+margin_right = 1014.0
+margin_bottom = 606.0
+rect_min_size = Vector2( 300, 0 )
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cola" type="VBoxContainer" parent="Panel/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentPlayerTitle" type="Label" parent="Panel/TabContainer/Cola"]
+margin_right = 996.0
+margin_bottom = 14.0
+text = "Jugador Actual:"
+
+[node name="CurrentPlayerText" type="Label" parent="Panel/TabContainer/Cola"]
+margin_top = 18.0
+margin_right = 996.0
+margin_bottom = 32.0
+text = "Nadie"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/TabContainer/Cola"]
+margin_top = 36.0
+margin_right = 996.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="Panel/TabContainer/Cola"]
+margin_top = 44.0
+margin_right = 996.0
+margin_bottom = 58.0
+text = "Cola de jugadores:"
+
+[node name="PlayerScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/Cola"]
+margin_top = 62.0
+margin_right = 996.0
+margin_bottom = 520.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+listenerNodepath = NodePath("../../../..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/Cola/PlayerScrollContainer"]
+margin_right = 996.0
+margin_bottom = 458.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Vetos" type="VBoxContainer" parent="Panel/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="BuscadorVetados" type="LineEdit" parent="Panel/TabContainer/Vetos"]
+margin_right = 996.0
+margin_bottom = 24.0
+placeholder_text = "Escribe para buscar"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/TabContainer/Vetos"]
+margin_top = 28.0
+margin_right = 996.0
+margin_bottom = 32.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/Vetos"]
+margin_top = 36.0
+margin_right = 996.0
+margin_bottom = 520.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+listenerNodepath = NodePath("../../../..")
+
+[node name="Container" type="VBoxContainer" parent="Panel/TabContainer/Vetos/ScrollContainer"]
+margin_right = 996.0
+margin_bottom = 484.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Comandos" type="VBoxContainer" parent="Panel/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": true,
+"_editor_description_": ""
+}
+
+[node name="CleanQueueButton" type="Button" parent="Panel/TabContainer/Comandos"]
+margin_right = 90.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+text = "Limpiar cola"
+
+[node name="BanPlayerButton" type="Button" parent="Panel/TabContainer/Comandos"]
+margin_top = 24.0
+margin_right = 114.0
+margin_bottom = 44.0
+size_flags_horizontal = 0
+text = "Vetar Jugador"
+
+[node name="ShowCommandsButton" type="Button" parent="Panel/TabContainer/Comandos"]
+margin_top = 48.0
+margin_right = 95.0
+margin_bottom = 68.0
+size_flags_horizontal = 0
+text = "Mostrar Comandos"
+
+[node name="NextPlayerButton" type="Button" parent="Panel/TabContainer/Comandos"]
+margin_top = 72.0
+margin_right = 121.0
+margin_bottom = 92.0
+size_flags_horizontal = 2
+text = "Siguiente Jugador"
+
+[node name="ShowTop10Button" type="Button" parent="Panel/TabContainer/Comandos"]
+margin_right = 12.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+text = "Show Top 10"
+
+[node name="BlockingBackground" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.392157 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+popupDialogs = [ NodePath("../ConfirmationDialog"), NodePath("../AuthDialog"), NodePath("../ModifyCommandsDialog"), NodePath("../ChangePlayerPosWindow"), NodePath("../BanPlayerWindow") ]
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+margin_right = 94.0
+margin_bottom = 58.0
+popup_exclusive = true
+window_title = "Error de conexión"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+window_title = "Por favor, Confirma..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AuthDialog" parent="." instance=ExtResource( 5 )]
+
+[node name="ModifyCommandsDialog" parent="." instance=ExtResource( 6 )]
+
+[node name="ChangePlayerPosWindow" parent="." instance=ExtResource( 7 )]
+
+[node name="BanPlayerWindow" parent="." instance=ExtResource( 9 )]
+
+[connection signal="cmd_no_permission" from="Gift" to="." method="_on_Gift_cmd_no_permission"]
+[connection signal="login_attempt" from="Gift" to="." method="_on_Gift_login_attempt"]
+[connection signal="twitch_connected" from="Gift" to="." method="_on_Gift_twitch_connected"]
+[connection signal="twitch_disconnected" from="Gift" to="." method="_on_Gift_twitch_disconnected"]
+[connection signal="twitch_unavailable" from="Gift" to="." method="_on_Gift_twitch_unavailable"]
+[connection signal="button_up" from="Panel/TopBar/StartButton" to="." method="_on_ConnectButton_button_up"]
+[connection signal="toggled" from="Panel/TopBar/SendMsgCheckBox" to="." method="_on_SendMsgCheckBox_toggled"]
+[connection signal="text_entered" from="Panel/TabContainer/Vetos/BuscadorVetados" to="Panel/TabContainer/Vetos/ScrollContainer" method="_on_BuscadorVetados_text_entered"]
+[connection signal="button_up" from="Panel/TabContainer/Comandos/CleanQueueButton" to="." method="_on_CleanQueueButton_button_up"]
+[connection signal="button_up" from="Panel/TabContainer/Comandos/BanPlayerButton" to="." method="_on_BanPlayerButton_button_up"]
+[connection signal="button_up" from="Panel/TabContainer/Comandos/ShowCommandsButton" to="." method="_on_ShowCommandsButton_button_up"]
+[connection signal="button_up" from="Panel/TabContainer/Comandos/NextPlayerButton" to="." method="_on_NextPlayerButton_button_up"]
+[connection signal="button_up" from="Panel/TabContainer/Comandos/ShowTop10Button" to="." method="_on_ShowTop10Button_button_up"]
+[connection signal="popup_hide" from="AuthDialog" to="." method="_on_AuthDialog_popup_hide"]
+[connection signal="start_session" from="AuthDialog" to="." method="_on_AuthDialog_start_session"]
+[connection signal="popup_hide" from="ModifyCommandsDialog" to="Gift" method="_on_ModifyCommandsDialog_popup_hide"]
+[connection signal="ban_player" from="BanPlayerWindow" to="." method="_on_BanPlayerWindow_ban_player"]
