@@ -55,5 +55,6 @@ Para personalizar comandos en la barra superior pulsa el boton 'opciones' y dent
 *La pantalla te permite limitar el permiso minimo que necesita un espectador para poder ejecutar los comandos de chat y añadir alias (separado por comas)*
 
 ## Creditos
-[Gift](https://github.com/MennoMax/gift) creado por MennoMax
+[Gift](https://github.com/MennoMax/gift) creado por MennoMax.
+  
 Software creado mediante [Godot Engine](https://godotengine.org/)
