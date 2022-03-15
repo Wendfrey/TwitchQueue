@@ -43,7 +43,7 @@ __meta__ = {
 margin_right = 73.0
 margin_bottom = 30.0
 text = "Opciones"
-items = [ "Cambiar Comandos", null, 0, false, false, 0, 0, null, "", false ]
+items = [ "Cambiar Comandos", null, 0, false, false, 0, 0, null, "", false, "Enviar mensajes a Twitch", null, 1, true, false, 1, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -71,13 +71,6 @@ max_lines_visible = 1
 margin_left = 328.0
 margin_right = 332.0
 margin_bottom = 30.0
-
-[node name="SendMsgCheckBox" type="CheckBox" parent="Panel/TopBar"]
-margin_left = 336.0
-margin_right = 524.0
-margin_bottom = 30.0
-pressed = true
-text = "Enviar mensajes a Twitch"
 
 [node name="TabContainer" type="TabContainer" parent="Panel"]
 margin_left = 10.0
@@ -266,7 +259,6 @@ __meta__ = {
 [connection signal="twitch_disconnected" from="Gift" to="." method="_on_Gift_twitch_disconnected"]
 [connection signal="twitch_unavailable" from="Gift" to="." method="_on_Gift_twitch_unavailable"]
 [connection signal="button_up" from="Panel/TopBar/StartButton" to="." method="_on_ConnectButton_button_up"]
-[connection signal="toggled" from="Panel/TopBar/SendMsgCheckBox" to="." method="_on_SendMsgCheckBox_toggled"]
 [connection signal="text_entered" from="Panel/TabContainer/Vetos/BuscadorVetados" to="Panel/TabContainer/Vetos/ScrollContainer" method="_on_BuscadorVetados_text_entered"]
 [connection signal="button_up" from="Panel/TabContainer/Comandos/CleanQueueButton" to="." method="_on_CleanQueueButton_button_up"]
 [connection signal="button_up" from="Panel/TabContainer/Comandos/BanPlayerButton" to="." method="_on_BanPlayerButton_button_up"]

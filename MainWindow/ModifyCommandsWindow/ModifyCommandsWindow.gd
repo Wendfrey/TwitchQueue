@@ -11,7 +11,7 @@ onready var cancelarButton = $MarginContainer/VBoxContainer/HBoxContainer/Cancel
 onready var defectoButton = $MarginContainer/VBoxContainer/HBoxContainer/DefectoButton
 
 var options_data
-var last_command_index = -1
+var last_command_index = 0
 
 onready var SettingsNode = get_node("/root/ReadWriteSettings")
 
@@ -46,7 +46,7 @@ func _ready():
 	if !options_data:
 		options_data = {}
 	
-	_load_option(0)
+	_load_option(last_command_index)
 	aplicarButton.disabled = true
 
 func _on_CommandSelector_item_selected(index):

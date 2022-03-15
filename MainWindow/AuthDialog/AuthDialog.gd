@@ -69,4 +69,3 @@ func write_file_data(user, password, channel):
 	settingsNode.current_settings["user"] = user
 	settingsNode.current_settings["password"] = password
 	settingsNode.current_settings["channel"] = channel
-	settingsNode.write_settings_file()

@@ -18,12 +18,12 @@ func init_auth(user, password):
 	
 func show_commands():
 	var str_commands = "Comandos disponibles: " + str(command_prefixes) + PoolStringArray(commands.keys().duplicate()).join(", " + str(command_prefixes))
-	print_debug(str_commands)
 	chat_main_channel(str_commands)
 	
 func chat_main_channel(msg: String):
 	print_debug(msg)
 	if not send_msg:
+		print_debug("Messages to twitch are disabled")
 		return
 
 	if channels.empty():
@@ -58,7 +58,6 @@ func add_command_with_settings(cmd_name: String, method_ref:String, min_args:int
 			add_alias(cmd_name, alias_stripped)
 
 func _on_ModifyCommandsDialog_popup_hide():
-	SettingsNode.write_settings_file()
 	reload_configuration()
 
 func _get_flag_from_string(flag: String) -> int:

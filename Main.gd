@@ -41,22 +41,14 @@ var session_user
 var session_password
 var session_channel
 
+onready var SettingsNode = get_node("/root/ReadWriteSettings")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	Set Minimun Window Size
 	OS.min_window_size = Vector2(700, 400)
-#	init variables
-	current_player = String()
-	gift.send_msg = sendMsgCheckBox.pressed
-	show_disconnect_popup = true
-	banned_players = [] #Value -> create a file with banned players and load it
-#	Add players for debugging if enabled
-	if(test_practice):
-		player_array = PoolStringArray(["Jorge", "Jaime", "Jaume", "David", 
-		"Maria", "Platano", "Wismichu", "Paria", "Antonio", "Mariano", "Luigiano",
-		"Maricarmen", "Tsuneo", "Nohara"])
-	else:
-		player_array = PoolStringArray()
+	
+	_init_vars()
 	
 #	Configure RetryDialog window
 	retryDialog.get_cancel().text= "Cancelar"
@@ -68,7 +60,22 @@ func _ready():
 	
 #	Update player list (even if it's empty
 	playerScrollContainer.set_player_names(player_array)
-
+	
+func _init_vars():
+	current_player = String()
+	if(SettingsNode.current_settings.has("send_msg_twitch") && not SettingsNode.current_settings["send_msg_twitch"]):
+		gift.send_msg = _toggle_options_item(1)
+	
+	show_disconnect_popup = false
+	banned_players = [] #Value -> create a file with banned players and load it
+#	Add players for debugging if enabled
+	if(test_practice):
+		player_array = PoolStringArray(["Jorge", "Jaime", "Jaume", "David", 
+		"Maria", "Platano", "Wismichu", "Paria", "Antonio", "Mariano", "Luigiano",
+		"Maricarmen", "Tsuneo", "Nohara"])
+	else:
+		player_array = PoolStringArray()
+	
 #Get index in queue of player_str
 func _get_value_index(player_str : String) -> int:
 	for i in range(player_array.size()):
@@ -138,7 +145,6 @@ func queue_position(cmd: CommandInfo):
 func queue_top10(cmd: CommandInfo):
 	show_top10_queue()
 		
-	
 #####Signal Answers#####
 #Connect to Twitch/Disconnect from Twitch
 func _on_ConnectButton_button_up():
@@ -174,10 +180,9 @@ func _on_OptionsMenu_id_pressed(id):
 		0:
 			if(not commandDialog.visible):
 				commandDialog.popup_centered()
-
-#Enable/Disable send messages to Twitch
-func _on_SendMsgCheckBox_toggled(button_pressed):
-	gift.send_msg = button_pressed
+		1:
+			gift.send_msg = _toggle_options_item(id)
+			SettingsNode.current_settings["send_msg_twitch"] = gift.send_msg
 
 #Show Window for banning a player (mostly thought for banning players not in queue)
 func _on_BanPlayerButton_button_up():
@@ -358,6 +363,7 @@ func _notification(what):
 		if(gift.websocket.get_connection_status() != NetworkedMultiplayerPeer.CONNECTION_DISCONNECTED):
 			show_disconnect_popup = false
 			gift.websocket.disconnect_from_host()
+		SettingsNode.write_settings_file()
 
 #Show menu for changing the queue position of player_str
 func _change_player_display_window(player_str:String):
@@ -367,3 +373,9 @@ func _change_player_display_window(player_str:String):
 	
 	changePlayerPosWindow.set_data(player_str, index+1)
 	changePlayerPosWindow.popup_centered()
+
+########OTHER###############
+func _toggle_options_item(id: int) -> bool:
+	var index = optionsButton.get_popup().get_item_index(id)
+	optionsButton.get_popup().toggle_item_checked(id)
+	return optionsButton.get_popup().is_item_checked(id)
